@@ -30,11 +30,6 @@
     <repo>https://git-wip-us.apache.org/repos/asf/cordova-plugin-camera.git</repo>
     <issue>https://issues.apache.org/jira/browse/CB/component/12320645</issue>
 
-    <engines>
-        <engine name="cordova" version=">=6.5.0"/>
-        <engine name="cordova-android" version=">=6.3.0" />
-    </engines>
-
     <js-module src="www/CameraConstants.js" name="Camera">
         <clobbers target="Camera" />
     </js-module>
