@@ -111,6 +111,7 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
     private int targetWidth;                // desired width of the image
     private int targetHeight;               // desired height of the image
     private CordovaUri imageUri;            // Uri of captured image
+    private String imageFilePath;           // File where the image is stored
     private int encodingType;               // Type of encoding to use
     private int mediaType;                  // What type of media to retrieve
     private int destType;                   // Source type (needs to be saved for the permission handling)
@@ -301,6 +302,7 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
 
         // Specify file so that large image is captured and returned
         File photo = createCaptureFile(encodingType);
+        this.imageFilePath = photo.getAbsolutePath();
         this.imageUri = new CordovaUri(FileProvider.getUriForFile(cordova.getActivity(),
                 applicationId + ".provider",
                 photo));
@@ -480,7 +482,7 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
 
         String sourcePath = (this.allowEdit && this.croppedUri != null) ?
                 FileHelper.stripFileProtocol(this.croppedUri.toString()) :
-                this.imageUri.getFilePath();
+                this.imageFilePath;
 
 
         if (this.encodingType == JPEG) {
