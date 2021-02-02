@@ -94,6 +94,7 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
     private static final String GET_PICTURE = "Get Picture";
     private static final String GET_VIDEO = "Get Video";
     private static final String GET_All = "Get All";
+    private static final String IMAGE_FILE_PATH_KEY = "imageFilePath";
 
     public static final int PERMISSION_DENIED_ERROR = 20;
     public static final int TAKE_PIC_SEC = 0;
@@ -1360,6 +1361,10 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
             state.putString("imageUri", this.imageUri.getFileUri().toString());
         }
 
+        if (this.imageFilePath != null) {
+            state.putString(IMAGE_FILE_PATH_KEY, this.imageFilePath);
+        }
+
         return state;
     }
 
@@ -1383,6 +1388,10 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
         if (state.containsKey("imageUri")) {
             //I have no idea what type of URI is being passed in
             this.imageUri = new CordovaUri(Uri.parse(state.getString("imageUri")));
+        }
+
+        if (state.containsKey(IMAGE_FILE_PATH_KEY)) {
+            this.imageFilePath = state.getString(IMAGE_FILE_PATH_KEY);
         }
 
         this.callbackContext = callbackContext;
